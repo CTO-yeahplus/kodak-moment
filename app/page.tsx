@@ -266,19 +266,18 @@ export default function KodakPitchPage() {
               브랜드 자산과 테크놀로지의 완벽한 결합, <br/>코닥 모먼트 클럽과 함께 미래를 현상하십시오.
             </p>
             <button 
-              onClick={() => setIsContactModalOpen(true)}
+              
               className="bg-[#EE2722] text-white px-14 py-6 rounded-full font-black text-2xl hover:scale-105 transition shadow-2xl shadow-red-500/30 flex items-center gap-4 mx-auto"
             >
-              <Mail className="w-8 h-8" /> PARTNERSHIP INQUIRY
+              <Mail className="w-8 h-8" /> contact@yeahplus.co.kr
             </button>
           </div>
           
           {/* Footer Bar (화면 맨 밑 고정) */}
           <footer className="absolute bottom-0 w-full py-8 border-t border-gray-100 px-6 bg-white">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-sm font-bold text-gray-400 gap-4">
-              <div>© 2026 KODAK MOMENT CLUB PROJECT. PRODUCED BY YEAHPLUS.</div>
+              <div>© 2026 KODAK MOMENT CLUB PROJECT.</div>
               <div className="flex gap-8">
-                <span className="hover:text-gray-800 cursor-pointer transition">BUSINESS PLAN</span>
                 <span className="hover:text-gray-800 cursor-pointer transition" onClick={() => setIsVideoModalOpen(true)}>APP DEMO</span>
                 <span className="hover:text-gray-800 cursor-pointer transition" onClick={() => setIsContactModalOpen(true)}>CONTACT</span>
               </div>
