@@ -67,14 +67,30 @@ const TRANSLATIONS = {
     simDesc: "데이터에 기반한 수익성 예측 (ARR)",
     simSomLabel: "Target SOM (목표 타겟 모수)",
     simCvrLabel: "Conversion Rate (유료 전환율)",
-    simPriceLabel: "Pricing Strategy",
-    simPriceDesc: <>코닥 골드 24장 인화 및<br/>전용 패키지 배송비 포함</>,
+    simPriceLabel: "수익화 모델 (Multi-tier Revenue)",
+    simPriceDesc: (
+      <div className="text-left space-y-3 mt-2">
+        <div className="p-3 bg-white/5 rounded-lg border border-[#FFD600]/30 shadow-[0_0_10px_rgba(255,214,0,0.1)]">
+          <p className="text-[#FFD600] font-bold text-xs mb-1 uppercase italic">Basic Plan (Premium)</p>
+          <p className="text-sm font-bold">월 14,900원 (인화/배송 포함)</p>
+          <p className="text-[10px] text-gray-400 mt-1">코닥 정품 인화지 사용 (뒷면 워터마크 보증)</p>
+        </div>
+        <div className="p-3 bg-white/5 rounded-lg border border-white/10">
+          <p className="text-gray-400 font-bold text-xs mb-1 uppercase italic">Premium Membership</p>
+          <p className="text-sm">ColorPlus, Portra, Ektar 등 필름 라인업 추가</p>
+        </div>
+        <div className="p-3 bg-white/5 rounded-lg border border-white/10">
+          <p className="text-gray-400 font-bold text-xs mb-1 uppercase italic">Storage Subscription</p>
+          <p className="text-sm">인화 데이터 고해상도 영구 저장 (Digital Darkroom)</p>
+        </div>
+      </div>
+    ),
     simResultSub: "Estimated Paid Subscribers",
     simResultArr: "Projected Annual Revenue (ARR)",
     formatUsers: (num: number) => <>{num.toLocaleString()} <span className="text-2xl md:text-3xl">명</span></>,
     formatArr: (annual: number) => <>₩ {(annual / 100000000).toFixed(1)} <span className="text-2xl md:text-3xl">억</span></>,
-    simNote: (cvr: number, annual: number) => `"보수적으로 잡아 타겟의 ${cvr}%만 확보해도, 연간 ${Math.floor(annual / 100000000)}억 원 이상의 예측 가능한 매출(ARR)이 발생합니다."`,
-
+    simNote: (cvr: number, annual: number) => `"정품 인화지 가치를 기반으로 14,900원 책정 시, 타겟의 ${cvr}%만 확보해도 연간 ${Math.floor(annual / 100000000)}억 원 이상의 고마진 ARR이 발생합니다."`,
+    
     ctaTitle: <>우리가 시장성을 증명했습니다.<br/><span className="text-[#EE2722]">이제 코닥의 인프라를 태울 차례입니다.</span></>,
     ctaDesc: <>브랜드 자산과 테크놀로지의 완벽한 결합. <br/>코닥 모먼트 클럽과 함께 미래를 현상하십시오.</>,
 
@@ -142,8 +158,23 @@ const TRANSLATIONS = {
     simDesc: "Data-driven profitability forecasting (ARR)",
     simSomLabel: "Target SOM (Users)",
     simCvrLabel: "Conversion Rate (%)",
-    simPriceLabel: "Pricing Strategy",
-    simPriceDesc: <>Includes 24 Kodak Gold prints &<br/>exclusive yellow package delivery fee</>,
+    simPriceLabel: "Multi-tier Revenue Model",
+    simPriceDesc: (
+      <div className="text-left space-y-3 mt-2">
+        <div className="p-3 bg-white/5 rounded-lg border border-white/10">
+          <p className="text-[#FFD600] font-bold text-xs mb-1 uppercase italic">Basic Plan</p>
+          <p className="text-sm">Gold 200 Prints & Delivery (9,900 KRW)</p>
+        </div>
+        <div className="p-3 bg-white/5 rounded-lg border border-white/10">
+          <p className="text-[#FFD600] font-bold text-xs mb-1 uppercase italic">Premium Membership</p>
+          <p className="text-sm">Unlock Portra, Ektar, and ColorPlus Film Series</p>
+        </div>
+        <div className="p-3 bg-white/5 rounded-lg border border-white/10">
+          <p className="text-[#FFD600] font-bold text-xs mb-1 uppercase italic">Storage Subscription</p>
+          <p className="text-sm">Permanent Cloud Archive for High-Res Scan Data</p>
+        </div>
+      </div>
+    ),
     simResultSub: "Estimated Paid Subscribers",
     simResultArr: "Projected Annual Revenue (ARR)",
     formatUsers: (num: number) => <>{num.toLocaleString()} <span className="text-2xl md:text-3xl">Users</span></>,
@@ -170,7 +201,7 @@ export default function KodakPitchPage() {
 
   const [som, setSom] = useState(300000);
   const [conversion, setConversion] = useState(10);
-  const [fee, setFee] = useState(9900);
+  const [fee, setFee] = useState(14900);
   const [results, setResults] = useState({ monthly: 0, annual: 0, subscribers: 0 });
 
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
@@ -344,12 +375,11 @@ export default function KodakPitchPage() {
                   </div>
                   <input type="range" min="1" max="20" step="1" value={conversion} onChange={(e) => setConversion(Number(e.target.value))} className="w-full h-2 md:h-3 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-[#FFD600]" />
                 </div>
+                
+                {/* ⭐️ 수익화 모델 (BM) 반영된 영역 */}
                 <div className="p-4 md:p-6 bg-[#222] rounded-xl md:rounded-2xl border border-white/5">
-                  <h4 className="text-xs md:text-sm font-bold text-gray-500 uppercase mb-3 md:mb-4 tracking-widest">{t.simPriceLabel}</h4>
-                  <div className="flex items-center gap-3 md:gap-4">
-                    <div className="text-2xl md:text-4xl font-black text-white italic">₩ 9,900</div>
-                    <div className="text-[10px] md:text-sm text-gray-400 font-medium leading-tight text-left break-keep">{t.simPriceDesc}</div>
-                  </div>
+                  <h4 className="text-xs md:text-sm font-bold text-gray-500 uppercase mb-3 tracking-widest">{t.simPriceLabel}</h4>
+                  {t.simPriceDesc}
                 </div>
               </div>
 
