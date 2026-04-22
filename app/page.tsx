@@ -501,10 +501,12 @@ export default function KodakPitchPage() {
       <AnimatePresence>
         {isVideoModalOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4">
-            <div className="relative w-full max-w-[360px] md:max-w-[400px] aspect-[9/16] bg-[#121212] rounded-3xl md:rounded-[40px] overflow-hidden shadow-2xl border-2 md:border-4 border-[#333]">
+            {/* 🚨 해결 포인트: 너비 고정 대신 높이(h-[85vh])를 기준으로 잡고, 영상 실제 비율(aspect-[888/1920])을 적용했습니다. */}
+            <div className="relative h-[85vh] md:h-[90vh] aspect-[888/1920] bg-[#121212] rounded-3xl md:rounded-[40px] overflow-hidden shadow-2xl border-2 md:border-4 border-[#333]">
               <button onClick={() => setIsVideoModalOpen(false)} className="absolute top-4 right-4 z-10 text-white bg-black/50 hover:bg-[#EE2722] rounded-full p-2 transition">
                 <X className="w-5 h-5 md:w-6 md:h-6" />
               </button>
+              {/* 🚨 object-cover를 사용해도 컨테이너 비율이 딱 맞아서 더 이상 위아래가 잘리지 않습니다. */}
               <video src="/kodak_demo.mp4" autoPlay controls loop playsInline className="w-full h-full object-cover" />
             </div>
           </motion.div>
